@@ -2,3 +2,6 @@ SQLAlchemy
 fastapi
 uvicorn[standard]
 python-dotenv
+requests
+celery
+celery[redis]
