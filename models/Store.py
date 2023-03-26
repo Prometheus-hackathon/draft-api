@@ -9,4 +9,12 @@ class Store(Base):
     quantity = Column(Integer)
     created_time = Column(DateTime,server_default=func.now())
     updated_time = Column(DateTime,server_default=func.now(),onupdate=func.now())
-    Farmers = relationship("Farmer.email", back_populates="Store")
+    Farmer_id = Column(Integer, ForeignKey('Farmer.email'))
+    Farmers = relationship("Farmer", back_populates="Store")
+
+    def __init__(self, storeItem, quantity):
+        self.storeItem = storeItem
+        self.quantity = quantity
+
+    def __repr__(self):
+        return f"Store('{self.storeItem}', '{self.quantity}')"

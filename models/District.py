@@ -9,3 +9,11 @@ class District(Base):
     districtData = Column(String)
     created_time = Column(DateTime,server_default=func.now())
     updated_time = Column(DateTime,server_default=func.now(),onupdate=func.now())
+    farmers = relationship("Farmer", back_populates="District")
+
+    def __init__(self, districtName, districtData):
+        self.districtName = districtName
+        self.districtData = districtData
+
+    def __repr__(self):
+        return f"District('{self.districtName}', '{self.districtData}')"

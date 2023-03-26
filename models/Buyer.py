@@ -11,4 +11,14 @@ class Buyer(Base):
     Address = Column(String)
     created_time = Column(DateTime,server_default=func.now())
     updated_time = Column(DateTime,server_default=func.now(),onupdate=func.now())
-    purchases  = relationship("Transaction.id", back_populates="Buyer")
+    purchase_id = Column(Integer, ForeignKey('Transaction.id'))
+    purchases  = relationship("Transaction", back_populates="Buyer")
+
+    def __init__(self, first_name, last_name, Phone, Address):
+        self.first_name = first_name
+        self.last_name = last_name
+        self.Phone = Phone
+        self.Address = Address
+
+    def __repr__(self):
+        return f"Buyer('{self.first_name}', '{self.last_name}', '{self.Phone}', '{self.Address}')"
